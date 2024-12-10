@@ -1,0 +1,77 @@
+<div class="p-0">
+  <div class="max-w-7xl mx-auto bg-white p-6 rounded-lg shadow-md relative">
+    <!-- Edit Button -->
+    
+
+    <!-- Profile Heading -->
+    <h4 class="text-xl font-semibold text-gray-700 mb-2">Profile</h4>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Bio Section -->
+      <div class="col-span-1 bg-gray-50 p-6 rounded-lg shadow-md">
+        <h3 class="text-2xl font-bold text-gray-800 mb-4">Bio</h3>
+        <% if current_user.teacher? %>
+          <p class="text-gray-600"><span class="font-medium">Bio:</span> <%= @teacher&.bio || "Not provided" %></p>
+        <% else %>
+          <p class="text-gray-600">This section is only available for teachers.</p>
+        <% end %>
+      </div>
+
+      <!-- Main Profile Section -->
+      <div class="col-span-1 md:col-span-2 bg-gray-50 p-6 rounded-lg shadow-md">
+        <!-- Personal Information -->
+        <div class="mb-6">
+          <h3 class="text-xl font-semibold text-gray-700 mb-2">Personal Information</h3>
+          <div class="space-y-2">
+            <p class="text-gray-600"><span class="font-medium">First Name:</span> <%= current_user.first_name %></p>
+            <p class="text-gray-600"><span class="font-medium">Last Name:</span> <%= current_user.last_name %></p>
+            <% if @teacher&.gender || @student&.gender %>
+              <p class="text-gray-600"><span class="font-medium">Gender:</span> <%= (@teacher || @student).gender %></p>
+            <% else %>
+              <p class="text-gray-600"><span class="font-medium">Gender:</span> Not provided</p>
+            <% end %>
+            <% if @teacher&.date_of_birth || @student&.date_of_birth %>
+              <p class="text-gray-600"><span class="font-medium">Date of Birth:</span> <%= (@teacher || @student).date_of_birth.strftime("%B %d, %Y") %></p>
+            <% else %>
+              <p class="text-gray-600"><span class="font-medium">Date of Birth:</span> Not provided</p>
+            <% end %>
+          </div>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="mb-6">
+          <h3 class="text-xl font-semibold text-gray-700 mb-2">Contact Information</h3>
+          <div class="space-y-2">
+            <p class="text-gray-600"><span class="font-medium">Email:</span> <%= current_user.email %></p>
+            <% if @teacher&.telephone || @student&.telephone %>
+              <p class="text-gray-600"><span class="font-medium">Telephone:</span> <%= (@teacher || @student).telephone %></p>
+            <% else %>
+              <p class="text-gray-600"><span class="font-medium">Telephone:</span> Not provided</p>
+            <% end %>
+            <% if @teacher&.city || @student&.city %>
+              <p class="text-gray-600"><span class="font-medium">City:</span> <%= (@teacher || @student).city %></p>
+            <% else %>
+              <p class="text-gray-600"><span class="font-medium">City:</span> Not provided</p>
+            <% end %>
+            <% if @teacher&.country || @student&.country %>
+              <p class="text-gray-600"><span class="font-medium">Country:</span> <%= (@teacher || @student).country %></p>
+            <% else %>
+              <p class="text-gray-600"><span class="font-medium">Country:</span> Not provided</p>
+            <% end %>
+          </div>
+        </div>
+
+        <!-- Others Section -->
+        <% if current_user.teacher? %>
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-2">Others</h3>
+            <div class="space-y-2">
+              <p class="text-gray-600"><span class="font-medium">Specialisation:</span> <%= @teacher&.specialisation || "Not provided" %></p>
+              <p class="text-gray-600"><span class="font-medium">Experience:</span> <%= @teacher&.experience || "Not provided" %></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+</div>
